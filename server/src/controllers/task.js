@@ -1,4 +1,4 @@
-import TaskModel from "../models/task.js";
+const TaskModel = require("../models/task.js");
 const taskControllers = {
     getTasks: async (req, res) => {
         const tasks = await TaskModel.find();
@@ -6,4 +6,4 @@ const taskControllers = {
     }
 };
 
-export default taskControllers;
+module.exports = taskControllers;

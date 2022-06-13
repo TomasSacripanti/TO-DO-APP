@@ -1,8 +1,6 @@
-import express from "express";
-import taskController from "../controllers/task.js";
-
-const router = express.Router();
+const router = require("express").Router();
+const taskController = require("../controllers/task.js");
 
 router.get("/", taskController.getTasks);
 
-export default router;
+module.exports = router;
