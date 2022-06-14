@@ -11,11 +11,24 @@ const taskControllers = {
             console.log(error.message);
         }
     },
+    getTask: async (req, res) => {
+        try {
+            const {id} = req.params;
+            const task = await TaskModel.findById(id);
+            if (!task.date === moment().format("YYYY/MM/DD")) {
+                res.json({status: 404, message: "The requested task is not from today"});
+            } else {
+                res.json({status: 200, data: task});
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    },
     getTodayTasks: async (req, res) => {
         try {
-            const tasks = await TaskModel.find();
-            const todayTasks = tasks.filter(task => {
-                task.date === moment().format("YYYY/MM/DD");
+            const todayTasks = await TaskModel.find();
+            todayTasks.filter(task => {
+                task.date.toISOString().split('T')[0] === moment().format("YYYY/MM/DD");
             });
             res.json({code: 200, data: todayTasks});
         } catch (error) {
@@ -29,7 +42,7 @@ const taskControllers = {
                 title: title,
                 description: description,
                 done: false,
-                date: moment().format("YYYY/MM/DD")
+                date: new Date().toISOString().split('T')[0]
             });
             await newTask.save();
             res.json({code: 201, message: "Task created"});
@@ -40,6 +53,10 @@ const taskControllers = {
     updateTask: async (req, res) => {
         const {id} = req.params;
         await TaskModel.findByIdAndUpdate(id, {});
+    },
+    deleteTasks: async (req, res) => {
+        await TaskModel.deleteMany();
+        res.json({status: 200, message: "All tasks deleted"});
     }
 };
 
