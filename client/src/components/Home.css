@@ -1,0 +1,16 @@
+.container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
+
+.create-task {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
