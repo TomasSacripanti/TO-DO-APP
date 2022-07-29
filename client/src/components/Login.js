@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./RegisterLogin.css";
-import { Form, Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
+import {Form, Button} from "react-bootstrap";
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -20,10 +22,14 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="wrapper">
       <Form className="form">
+        <h1>
+          Sign In
+        </h1>
+        <hr className="w-50" />
         <Form.Group>
-          <Form.Label htmlFor="user"></Form.Label>
+          <Form.Label htmlFor="user">User</Form.Label>
           <Form.Control
             type="text"
             id="user"
@@ -33,7 +39,7 @@ const Login = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="password"></Form.Label>
+          <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             type="password"
             id="password"
@@ -42,7 +48,14 @@ const Login = () => {
             onChange={handleInput}
           />
         </Form.Group>
-        <Button variant="primary">Primary</Button>
+        <Form.Group>
+          <Button variant="success" className="btn-success my-3 mx-2">
+            Log in
+          </Button>
+          <Link to="/register" className="btn btn-primary my-3 mx-2">
+            Register
+          </Link>
+        </Form.Group>
       </Form>
     </div>
   );
